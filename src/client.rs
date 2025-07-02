@@ -29,18 +29,15 @@ impl ScalewayClient {
 
         let mut request = self.http.request(endpoint.method(), &url);
 
-        // Authentification
         request = request.header(
             "X-Auth-Token",
             HeaderValue::from_str(&self.secret_key).unwrap(),
         );
 
-        // Query string
         if !endpoint.query().is_empty() {
             request = request.query(&endpoint.query());
         }
 
-        // Corps de la requête
         if let Some(body) = endpoint.body() {
             request = request.json(&body);
         }

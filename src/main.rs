@@ -14,7 +14,7 @@ use tracing_subscriber::{self, EnvFilter};
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt()
-        .with_env_filter(EnvFilter::from_default_env().add_directive(tracing::Level::ERROR.into()))
+        .with_env_filter(EnvFilter::from_default_env().add_directive(tracing::Level::INFO.into()))
         .with_writer(std::io::stderr)
         .with_ansi(false)
         .init();
@@ -23,6 +23,8 @@ async fn main() -> Result<()> {
 
     let secret_key =
         std::env::var("SCALEWAY_SECRET_KEY").expect("Env var SCALEWAY_SECRET_KEY not found");
+
+    tracing::info!("SCALEWAY_SECRET_KEY {}", secret_key);
 
     tracing::info!("Starting MCP server");
 
