@@ -21,5 +21,4 @@ COPY --from=builder \
     /usr/src/app/target/release/scaleway-mcp \
     /usr/local/bin/scaleway-mcp
 
-# Commande d'entrée
 ENTRYPOINT ["/usr/local/bin/scaleway-mcp"]
